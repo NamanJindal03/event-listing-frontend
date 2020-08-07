@@ -5,12 +5,14 @@ import Base from './core/base'
 import Signup from './user/signup'
 import Signin from './user/signin'
 import PrivateRoute from './auth/PrivateRoutes'
+import CreateEvent from './core/createEvent'
 const Routes = () =>{
     return(
         <Router>
             
                 <Switch>
                     <PrivateRoute path="/" exact component={Home} />
+                    <PrivateRoute path="/create-event" exact component={CreateEvent} />
                     <Route path="/sign-up" component={Signup}/>
                     <Route path="/sign-in" component={Signin}/>
                 </Switch>
