@@ -4,12 +4,13 @@ import Home from './core/home'
 import Base from './core/base'
 import Signup from './user/signup'
 import Signin from './user/signin'
+import PrivateRoute from './auth/PrivateRoutes'
 const Routes = () =>{
     return(
         <Router>
             
                 <Switch>
-                    <Route path="/" exact component={Home} />
+                    <PrivateRoute path="/" exact component={Home} />
                     <Route path="/sign-up" component={Signup}/>
                     <Route path="/sign-in" component={Signin}/>
                 </Switch>

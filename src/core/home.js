@@ -7,7 +7,7 @@ function Home() {
     return (
             <>
             <Navbar/>
-            <h1 className="text-white"> My Home Page </h1>
+            <h1 className="text-white"> All Events Happening </h1>
             </>
         
     );
