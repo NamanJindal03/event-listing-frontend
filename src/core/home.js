@@ -5,6 +5,7 @@ import '../style.css';
 import Navbar from './navbar'
 import {displayEvent} from './helper/eventApiCalls'
 function Home() {
+    //using react hooks to declare states
     const [values, setValues] = useState({
         loading: true,
         error:"",
@@ -12,7 +13,9 @@ function Home() {
         events:[],
         
     })
+    //desctructing states 
     const {loading, error, success, events} = values;
+    //if events are getting fetched then displays loading message using conditional rendering
     const loadingMessage = () => {
         return(
             loading && (
@@ -22,6 +25,7 @@ function Home() {
             )
         )
     }
+    //if event fails to load displays error message
     const errorMessage = () => (
         <div className="row">
             <div className="col-md-6 offset-sm-3 text-left">
@@ -30,6 +34,7 @@ function Home() {
         </div>
     )
     const preload = () =>{
+        //calling fetch all events api
         displayEvent()
             .then(data =>{
                 if(data.error){
@@ -45,9 +50,11 @@ function Home() {
             })
         
     }
+    //using useEffect hook
     useEffect(()=>{
         preload()  
     },[])
+    //displaying all events
     const addEvents = () =>{
         console.log("here");
         return(

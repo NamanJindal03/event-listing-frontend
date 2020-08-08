@@ -14,7 +14,6 @@ const Signin = () =>{
     const {email, password, error, loading, didRedirect} = values;
     //fills in all the values of the user
     const {user} = isAuthenticated();
-    console.log(user);
     const handleChange = name => event =>{
         setValues({...values, error:false, [name]:event.target.value})
     }

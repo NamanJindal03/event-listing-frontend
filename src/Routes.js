@@ -10,6 +10,7 @@ const Routes = () =>{
         <Router>
             
                 <Switch>
+                    {/* Private Routes - only authenticated user can access these routes */}
                     <PrivateRoute path="/" exact component={Home} />
                     <PrivateRoute path="/create-event" exact component={CreateEvent} />
                     <Route path="/sign-up" component={Signup}/>

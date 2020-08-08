@@ -3,6 +3,7 @@ import Navbar from '../core/navbar'
 import {createEventCall} from './helper/eventApiCalls'
 
 const CreateEvent = () =>{
+    //using react hooks to declare states
     const [values, setValues] = useState({
         name : "",
         description: "",
@@ -12,18 +13,25 @@ const CreateEvent = () =>{
         error: "",
         success:false
     })
-    const {name, description, location, time, dateTime, cost, error, success} = values;
+    //desctructing states 
+    const {name, description, location,  dateTime, cost, error, success} = values;
+
+    //updating states when form is filled - using highorder functions
     const handleChange = name => event =>{
         setValues({...values, error:false, [name]:event.target.value})
     }
+    //upon clicking the submit button
     const onSubmit = event => {
         event.preventDefault();
         setValues({...values, error:false})
+        //calling the createEventCall api
         createEventCall({name, description, location, dateTime,cost})
             .then(data =>{
+                //if error then set the error state and success state
                 if(data.error){
                     setValues({...values, error: data.error, success:false})
                 }else{
+                    //clearing all state as success
                     setValues({...values, name:"", description:"", location:"", dateTime:"",cost:"",error: "", success: true})
                 }
             })
@@ -31,6 +39,7 @@ const CreateEvent = () =>{
                 console.log(err);
             })
     }
+    //form 
     const eventCreationForm = () =>{
         return(
             <div className="row">
@@ -64,6 +73,7 @@ const CreateEvent = () =>{
             </div>
         )
     }
+    //if event succesfully created then displays a success message
     const successMessage = () => (
         <div className="row">
             <div className="col-md-6 offset-sm-3 text-left">
@@ -71,6 +81,7 @@ const CreateEvent = () =>{
             </div>
         </div>
     )
+    //if event fails to create then displays error message
     const errorMessage = () => (
         <div className="row">
             <div className="col-md-6 offset-sm-3 text-left">

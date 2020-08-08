@@ -1,5 +1,6 @@
 import React from 'react'
 const Card = (props)=>{
+    //destructing all props
     const {name, location, description, dateTime, conductedBy, contactOrganizer, cost} = props;
     return(
         
@@ -16,8 +17,6 @@ const Card = (props)=>{
                     <span className="card-text">{conductedBy}</span>
                     <span className="card-text">{contactOrganizer}</span>
                 </div>
-                
-                
             </div>
         </div>
     ) 

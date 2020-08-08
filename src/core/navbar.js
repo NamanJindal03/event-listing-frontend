@@ -20,6 +20,7 @@ const Navbar = ({history}) =>{
                 <li className="nav-item">
                     <Link style={currentTab(history, "/")} className="nav-link" to="/">Home</Link>
                 </li>
+                {/* if not authenticated then show signup and signin */}
                 {!isAuthenticated() && (
                     <>
                         <li className="nav-item">
@@ -30,10 +31,11 @@ const Navbar = ({history}) =>{
                         </li>
                     </>
                 )}
-                
+                {/* if authenticated then only show signout */}
                 {isAuthenticated() && (
                     <li className="nav-item">
                         <span className="nav-link text-warning" onClick={()=>{
+                            /* After signout relocate to sign-in */
                             signout(() => {
                                 history.push("/sign-in")
                             })

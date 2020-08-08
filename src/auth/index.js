@@ -1,7 +1,7 @@
 import API from "../backend"
 
-export const signup = user =>{
-    
+//hitting signup api
+export const signup = user =>{  
     return fetch (`${API}/user/register`,{
         method: "POST",
         headers:{
@@ -17,6 +17,8 @@ export const signup = user =>{
         console.log(err);
     })
 }
+
+//hitting signin api
 export const signin = user =>{
     return fetch (`${API}/user/login`,{
         method: "POST",
@@ -33,18 +35,27 @@ export const signin = user =>{
         console.log(err);
     })
 }
+
+//hitting signout api
 export const signout = next =>{
     if(typeof window !=="undefined"){
-        localStorage.removeItem("jwt")
+        localStorage.removeItem("jwt");
+        if(isAuthenticated()){
+            var bearer = `bearer ${isAuthenticated().token}`
+        }
         next();
-        return fetch(`${API}/signout`, {
-            method: 'GET'
+        return fetch(`${API}/user/logout`, {
+            method: 'GET',
+            headers:{
+                Authorization : bearer,
+            }
         })
         .then(response => console.log("signout success"))
         .catch(err => console.log(err))
     }
 }
 
+//setting tokens in the localStorage
 export const authenticate = (data, next) =>{
     if(typeof window !=="undefined"){
         localStorage.setItem("jwt", JSON.stringify(data))
@@ -52,6 +63,7 @@ export const authenticate = (data, next) =>{
     }
 }
 
+//authenticating user function
 export const isAuthenticated =() =>{
     if(typeof window =="undefined"){
         
