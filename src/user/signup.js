@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import Navbar from '../core/navbar'
-import {Link} from 'react-router-dom'
 import {signup} from '../auth/index'
 
 const Signup = () =>{
@@ -73,10 +72,12 @@ const Signup = () =>{
     return(
         <>
             <Navbar />
+            <h1 className="text-white d-flex justify-content-center"> Sign Up</h1>
+
             {successMessage()}
             {errorMessage()}
             {signUpForm()}
-            <p className="text-white text-center">{JSON.stringify(values)}</p>
+            {/* <p className="text-white text-center">{JSON.stringify(values)}</p> */}
         </>
         
     )

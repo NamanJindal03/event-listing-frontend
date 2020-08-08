@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import Navbar from '../core/navbar'
-import {Link} from 'react-router-dom'
-import {signup} from '../auth/index'
+import {createEventCall} from './helper/eventApiCalls'
 
 const CreateEvent = () =>{
     const [values, setValues] = useState({
@@ -17,19 +16,21 @@ const CreateEvent = () =>{
     const handleChange = name => event =>{
         setValues({...values, error:false, [name]:event.target.value})
     }
-    // const onSubmit = event => {
-    //     event.preventDefault();
-    //     setValues({...values, error:false})
-    //     signup({name, email, password, confirm_password})
-    //         .then(data =>{
-    //             if(data.error){
-    //                 setValues({...values, error: data.error, success:false})
-    //             }else{
-    //                 setValues({...values, name:"", email:"", password:"", confirm_password:"",error: "", success: true})
-    //             }
-    //         })
-    //         .catch(console.log("error in signup"))
-    // }
+    const onSubmit = event => {
+        event.preventDefault();
+        setValues({...values, error:false})
+        createEventCall({name, description, location, dateTime,cost})
+            .then(data =>{
+                if(data.error){
+                    setValues({...values, error: data.error, success:false})
+                }else{
+                    setValues({...values, name:"", description:"", location:"", dateTime:"",cost:"",error: "", success: true})
+                }
+            })
+            .catch(err =>{
+                console.log(err);
+            })
+    }
     const eventCreationForm = () =>{
         return(
             <div className="row">
@@ -57,7 +58,7 @@ const CreateEvent = () =>{
                             <label className="text-light">Event Cost</label>
                             <input onChange={handleChange("cost")} className="form-control" type="number" value={cost}/>
                         </div>
-                        <button  className="btn btn-success btn-block">Submit</button>
+                        <button onClick={onSubmit} className="btn btn-success btn-block">Submit</button>
                     </form>
                 </div>
             </div>
@@ -80,10 +81,11 @@ const CreateEvent = () =>{
     return(
         <>
             <Navbar />
+            <h1 className="text-white d-flex justify-content-center"> Create Event</h1>
             {successMessage()}
             {errorMessage()}
             {eventCreationForm()}
-            <p className="text-white text-center">{JSON.stringify(values)}</p>
+            {/* <p className="text-white text-center">{JSON.stringify(values)}</p> */}
         </>
         
     )

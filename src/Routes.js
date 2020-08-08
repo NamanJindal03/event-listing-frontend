@@ -1,7 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from './core/home'
-import Base from './core/base'
 import Signup from './user/signup'
 import Signin from './user/signin'
 import PrivateRoute from './auth/PrivateRoutes'

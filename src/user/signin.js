@@ -1,18 +1,20 @@
 import React, {useState} from 'react'
 import Navbar from '../core/navbar'
-import {Link, Redirect} from 'react-router-dom'
+import { Redirect} from 'react-router-dom'
 
 import {signin, isAuthenticated, authenticate} from "../auth/index"
 const Signin = () =>{
     const [values, setValues] = useState({
-        email: "namanjindal99@gmail.com",
-        password: "njmknj",
+        email: "",
+        password: "",
         error: "",
         loading: false,
         didRedirect: false
     })
     const {email, password, error, loading, didRedirect} = values;
+    //fills in all the values of the user
     const {user} = isAuthenticated();
+    console.log(user);
     const handleChange = name => event =>{
         setValues({...values, error:false, [name]:event.target.value})
     }
@@ -31,6 +33,7 @@ const Signin = () =>{
                         })
                     })
                 }
+                return;
             })
             .catch(console.log("signin request failed"))
     }
@@ -78,11 +81,12 @@ const Signin = () =>{
     return(
         <>
             <Navbar />
+            <h1 className="text-white d-flex justify-content-center"> Sign In</h1>
             {loadingMessage()}
             {errorMessage()}
             {signInForm()}
             {performRedirect()}
-            <p className="text-white text-center ">{JSON.stringify(values)}</p>
+            {/* <p className="text-white text-center ">{JSON.stringify(values)}</p> */}
         </>
         
     )

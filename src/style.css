@@ -4,3 +4,9 @@ body{
 .text-white{
     color: white;
 }
+
+.align-cards{
+    display: flex;
+flex-direction: column;
+align-items: center;
+}
